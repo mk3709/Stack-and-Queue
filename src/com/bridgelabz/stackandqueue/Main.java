@@ -19,7 +19,7 @@ class LinkedList {
     }
 }
 
-class Stack{
+class Stack {
     LinkedList linkedList;
 
     public Stack() {
@@ -30,7 +30,27 @@ class Stack{
         linkedList.add(data);
     }
 
-    // Other stack operations like pop, peek, isEmpty can be added here
+    public int peek() {
+        if (linkedList.head != null) {
+            return linkedList.head.data;
+        } else {
+            throw new IllegalStateException("Stack is empty");
+        }
+    }
+
+    public int pop() {
+        if (linkedList.head != null) {
+            int data = linkedList.head.data;
+            linkedList.head = linkedList.head.next;
+            return data;
+        } else {
+            throw new IllegalStateException("Stack is empty");
+        }
+    }
+
+    public boolean isEmpty() {
+        return linkedList.head == null;
+    }
 
     public void printStack() {
         Node current = linkedList.head;
@@ -42,7 +62,7 @@ class Stack{
     }
 }
 
-public class Main{
+public class Main {
     public static void main(String[] args) {
         Stack stack = new Stack();
 
@@ -54,5 +74,12 @@ public class Main{
         // Print the stack
         System.out.println("Stack after push operations:");
         stack.printStack();
+
+        // Peek and pop until the stack is empty
+        System.out.println("Peek: " + stack.peek());
+
+        while (!stack.isEmpty()) {
+            System.out.println("Pop: " + stack.pop());
+        }
     }
 }
