@@ -1,4 +1,5 @@
 package com.bridgelabz.stackandqueue;
+
 class Node {
     int data;
     Node next;
@@ -11,13 +12,26 @@ class Node {
 
 class LinkedList {
     Node head;
+    Node tail;
+
 
     public void add(int data) {
         Node newNode = new Node(data);
         newNode.next = head;
         head = newNode;
     }
-}
+
+        public void append(int data) {
+            Node newNode = new Node(data);
+            if (head == null) {
+                head = tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+    }
+
 
 class Stack {
     LinkedList linkedList;
@@ -62,6 +76,31 @@ class Stack {
     }
 }
 
+class Queue {
+    LinkedList linkedList;
+
+    public Queue() {
+        this.linkedList = new LinkedList();
+    }
+
+    public void enqueue(int data) {
+        linkedList.append(data);
+    }
+
+    // Other queue operations like dequeue, front, isEmpty can be added here
+
+    public void printQueue() {
+        Node current = linkedList.head;
+        while (current != null) {
+            System.out.print(current.data + "->");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+}
+
+
+
 public class Main {
     public static void main(String[] args) {
         Stack stack = new Stack();
@@ -81,5 +120,16 @@ public class Main {
         while (!stack.isEmpty()) {
             System.out.println("Pop: " + stack.pop());
         }
+
+        Queue queue = new Queue();
+        queue.enqueue(56);
+        queue.enqueue(30);
+        queue.enqueue(70);
+
+        // Print the queue
+        System.out.println("Queue after enqueue operations:");
+        queue.printQueue();
+
+
     }
 }
