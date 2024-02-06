@@ -21,19 +21,30 @@ class LinkedList {
         head = newNode;
     }
 
-        public void append(int data) {
-            Node newNode = new Node(data);
-            if (head == null) {
-                head = tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
+    public void append(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
         }
     }
 
+    public int remove() {
+        if (head != null) {
+            int data = head.data;
+            head = head.next;
+            return data;
+        } else {
+            throw new IllegalStateException("Queue is empty");
+        }
 
-class Stack {
+    }
+}
+
+
+    class Stack {
     LinkedList linkedList;
 
     public Stack() {
@@ -76,7 +87,7 @@ class Stack {
     }
 }
 
-class Queue {
+class Queue{
     LinkedList linkedList;
 
     public Queue() {
@@ -87,7 +98,16 @@ class Queue {
         linkedList.append(data);
     }
 
-    // Other queue operations like dequeue, front, isEmpty can be added here
+
+    public int dequeue() {
+        return linkedList.remove();
+    }
+
+    public boolean isEmpty() {
+        return linkedList.head == null;
+    }
+
+
 
     public void printQueue() {
         Node current = linkedList.head;
@@ -130,6 +150,19 @@ public class Main {
         System.out.println("Queue after enqueue operations:");
         queue.printQueue();
 
+        while (!queue.isEmpty()) {
+            System.out.println("Dequeue: " + queue.dequeue());
+        }
+    }
 
     }
-}
+
+
+
+
+
+
+
+
+
+
